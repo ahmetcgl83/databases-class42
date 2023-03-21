@@ -1,0 +1,83 @@
+const sql = require("mysql");
+
+const db = sql.createConnection({
+	host: "localhost",
+	user: "hyfuser",
+	password: "hyfpassword",
+	database: "world",
+});
+
+db.connect();
+
+const countryNames = "SELECT name FROM country WHERE population > 8000000";
+db.query(countryNames, (err, result) => {
+	if (err) throw err;
+	console.log("Countries with population greater than 8 million are", result);
+});
+
+const countriesWithLand = "SELECT name FROM country WHERE name LIKE ('%land%')";
+db.query(countriesWithLand, (err, result) => {
+	if (err) throw err;
+	console.log("Countries that have “land” in their names are", result);
+});
+
+const cities =
+	"SELECT name FROM city WHERE population > 500000 AND population < 1000000";
+db.query(cities, (err, result) => {
+	if (err) throw err;
+	console.log(
+		"Cities with population between 500,000 and 1 million are",
+		result
+	);
+});
+
+const europeanCountries = 'SELECT name FROM country WHERE continent = "Europe"';
+db.query(europeanCountries, (err, result) => {
+	if (err) throw err;
+	console.log("Countries in Europe are", result);
+});
+
+const descendingSurfaceArea =
+	"SELECT name FROM country ORDER BY SurfaceArea DESC";
+db.query(descendingSurfaceArea, (err, result) => {
+	if (err) throw err;
+	console.log(
+		"Countries by descending order with regard to surface areas are",
+		result
+	);
+});
+
+const NLCities = "SELECT name FROM city WHERE CountryCode = 'NLD'";
+db.query(NLCities, (err, result) => {
+	if (err) throw err;
+	console.log("Cities in the Netherlands are", result);
+});
+
+const rotterdamPopulation =
+	'SELECT population FROM city WHERE name = "Rotterdam"';
+db.query(rotterdamPopulation, (err, result) => {
+	if (err) throw err;
+	console.log("Population of Rotterdam is", result);
+});
+
+const tenCountriesBySurfaceArea =
+	"SELECT name FROM country ORDER BY SurfaceArea DESC LIMIT 10";
+db.query(tenCountriesBySurfaceArea, (err, result) => {
+	if (err) throw err;
+	console.log("10 countries by surface area are", result);
+});
+
+const tenCitiesByPopulation =
+	"SELECT name FROM city ORDER BY population DESC LIMIT 10";
+db.query(tenCitiesByPopulation, (err, result) => {
+	if (err) throw err;
+	console.log("10 most populated cities are", result);
+});
+
+const worldPopulation = "SELECT SUM(population) FROM country";
+db.query(worldPopulation, (err, result) => {
+	if (err) throw err;
+	console.log("World population is ", result);
+});
+
+db.end();
