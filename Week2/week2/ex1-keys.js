@@ -22,8 +22,6 @@ db.query(`USE db_week2`, (err, result) => {
 	console.log("Connected to db...");
 });
 
-//db.query("DROP TABLE IF EXISTS authors");
-
 db.query(
 	`CREATE TABLE authors (
     author_id INT AUTO_INCREMENT PRIMARY KEY,

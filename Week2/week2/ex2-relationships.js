@@ -33,10 +33,10 @@ db.query(
 	}
 );
 
-db.query(`DROP TABLE IF EXISTS author_of_research_Paper`);
+db.query(`DROP TABLE IF EXISTS authors_of_research_Paper`);
 
 db.query(
-	`CREATE TABLE IF NOT EXISTS author_of_research_Paper (
+	`CREATE TABLE IF NOT EXISTS authors_of_research_Paper (
     id INT AUTO_INCREMENT PRIMARY KEY, 
     author_id INT, 
     research_Paper_id INT, 
@@ -44,7 +44,7 @@ db.query(
     FOREIGN KEY (research_Paper_id) REFERENCES research_Paper (paper_id))`,
 	(err) => {
 		if (err) throw err;
-		console.log("Table author_of_research_Paper created ...");
+		console.log("Table authors_of_research_Paper created ...");
 	}
 );
 
@@ -85,12 +85,13 @@ VALUES
 );
 
 db.query(`
-    INSERT INTO author_of_research_Paper (
+    INSERT INTO authors_of_research_Paper (
         author_id, research_Paper_id
     ) VALUES 
-        (5,28),(5,21),(6,7),(6,13),(6,23),(7,3),(7,10),(7,11),(8,17),(8,22),
-        (1,4),(1,9),(1,12),(2,1),(2,5),(2,15),(3,2),(3,19),(3,29),(4,8),
-        (9,6),(9,14),(10,15),(10,20),(10,21),(11,23),(11,25),(11,27),(12,30),
+        (5,28),(5,21),(6,7),(6,13),(6,23),(7,3),(7,10),(7,11),(8,17),(8,22),(8,24),(9,9),(15,17),
+        (1,4),(1,9),(1,12),(2,1),(2,5),(2,15),(3,2),(3,19),(3,29),(4,8),(4,18),(4,16),(5,26),
+        (9,6),(9,14),(10,15),(10,20),(10,21),(11,23),(11,25),(11,27),(12,30),(12,1),(12,2),
+        (13,6),(13,8),(13,13),(13,30),(14,10),(14,5),(14,19),(14,22),(15,6),(15,24),(15,26)
 `);
 
 db.end();
